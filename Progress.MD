@@ -1,0 +1,349 @@
+# Excel to SharePoint Import Progress
+
+## Overview
+This file tracks the progress of importing data from Excel to SharePoint list.
+
+## Import History
+- [2025-01-22 11:49:41] Starting import process...
+- [2025-01-22 11:49:41] Connecting to SharePoint site: https://tspglobalcom.sharepoint.com/sites/esh/
+- [2025-01-22 11:49:43] Error: Specified method is not supported.
+- [2025-01-22 11:49:43] Disconnected from SharePoint
+- [2025-01-22 11:51:01] Starting import process...
+- [2025-01-22 11:51:01] Connecting to SharePoint site: https://tspglobalcom.sharepoint.com/sites/esh/
+- [2025-01-22 11:51:01] Error: Specified method is not supported.
+- [2025-01-22 11:51:01] Disconnected from SharePoint
+- [2025-01-22 11:54:39] Starting import process...
+- [2025-01-22 11:54:39] Connecting to SharePoint site: https://tspglobalcom.sharepoint.com/sites/esh/
+- [2025-01-22 11:54:39] Error: Specified method is not supported.
+- [2025-01-22 11:54:39] Disconnected from SharePoint
+- [2025-01-22 11:58:09] Starting import process...
+- [2025-01-22 11:58:09] SharePoint sitesine bağlanılıyor: https://tspglobalcom.sharepoint.com/sites/esh/
+- [2025-01-22 11:58:09] Hata: Specified method is not supported.
+- [2025-01-22 11:58:09] SharePoint bağlantısı zaten kapalı
+- [2025-01-22 11:58:58] Starting import process...
+- [2025-01-22 11:58:58] SharePoint sitesine bağlanılıyor: https://tspglobalcom.sharepoint.com/sites/esh/
+- [2025-01-22 11:59:00] Excel dosyası okunuyor: tobeimported_excel.xlsx
+- [2025-01-22 11:59:01] Toplam 9394 satır bulundu
+- [2025-01-22 11:59:07] 1. satır aktarılamadı: 'İLGİLİ SERVİS' sütunu yok. Başka bir kullanıcı tarafından silinmiş olabilir.  /sites/esh/Lists/Bakm  Envanter Listesi
+- [2025-01-22 11:59:11] 2. satır aktarılamadı: 'İLGİLİ SERVİS' sütunu yok. Başka bir kullanıcı tarafından silinmiş olabilir.  /sites/esh/Lists/Bakm  Envanter Listesi
+- [2025-01-22 11:59:19] SharePoint bağlantısı kapatıldı
+- [2025-01-22 12:04:26] Starting import process...
+- [2025-01-22 12:04:26] SharePoint sitesine bağlanılıyor: https://tspglobalcom.sharepoint.com/sites/esh/
+- [2025-01-22 12:04:28] SharePoint liste sütunları getiriliyor: Bakım - Envanter Listesi
+- [2025-01-22 12:04:35] Excel dosyası okunuyor: tobeimported_excel.xlsx
+- [2025-01-22 12:04:36] Toplam 9394 satır bulundu
+- [2025-01-22 12:04:41] 1. satır aktarılamadı: 'İLGİLİ SERVİS' sütunu yok. Başka bir kullanıcı tarafından silinmiş olabilir.  /sites/esh/Lists/Bakm  Envanter Listesi
+- [2025-01-22 12:04:48] SharePoint bağlantısı kapatıldı
+- [2025-01-22 12:09:58] Starting import process...
+- [2025-01-22 12:09:58] SharePoint sitesine bağlanılıyor: https://tspglobalcom.sharepoint.com/sites/esh/
+- [2025-01-22 12:10:00] SharePoint liste sütunları getiriliyor: Bakım - Envanter Listesi
+- [2025-01-22 12:10:03] Excel dosyası okunuyor: tobeimported_excel.xlsx
+- [2025-01-22 12:10:28] Excel sütun başlıkları SharePoint InternalName değerleri ile güncelleniyor
+- [2025-01-22 12:10:29] Hata: Missing an argument for parameter 'SaveAs'. Specify a parameter of type 'System.Object' and try again.
+- [2025-01-22 12:10:29] SharePoint bağlantısı kapatıldı
+- [2025-01-22 12:12:48] Starting import process...
+- [2025-01-22 12:12:48] SharePoint sitesine bağlanılıyor: https://tspglobalcom.sharepoint.com/sites/esh/
+- [2025-01-22 12:12:50] SharePoint liste sütunları getiriliyor: Bakım - Envanter Listesi
+- [2025-01-22 12:12:56] Excel dosyası okunuyor: tobeimported_excel.xlsx
+- [2025-01-22 12:13:06] Excel sütun başlıkları SharePoint InternalName değerleri ile güncelleniyor ve yeni dosya oluşturuluyor: tobeimported_excel_last.xlsx
+- [2025-01-22 12:13:06] Excel sütun başlıkları başarıyla güncellendi ve yeni dosya oluşturuldu
+- [2025-01-22 12:13:06] Güncellenmiş Excel dosyası okunuyor: tobeimported_excel_last.xlsx
+- [2025-01-22 12:13:07] Toplam 9394 satır bulundu
+- [2025-01-22 12:13:13] 1. satır başarıyla aktarıldı
+- [2025-01-22 12:13:18] 2. satır başarıyla aktarıldı
+- [2025-01-22 12:13:22] 3. satır başarıyla aktarıldı
+- [2025-01-22 12:13:27] 4. satır başarıyla aktarıldı
+- [2025-01-22 12:13:31] 5. satır başarıyla aktarıldı
+- [2025-01-22 12:13:37] 6. satır başarıyla aktarıldı
+- [2025-01-22 12:13:43] 7. satır başarıyla aktarıldı
+- [2025-01-22 12:13:48] 8. satır başarıyla aktarıldı
+- [2025-01-22 12:13:51] 9. satır başarıyla aktarıldı
+- [2025-01-22 12:13:53] 10. satır başarıyla aktarıldı
+- [2025-01-22 12:13:55] 11. satır başarıyla aktarıldı
+- [2025-01-22 12:13:56] 12. satır başarıyla aktarıldı
+- [2025-01-22 12:13:58] 13. satır başarıyla aktarıldı
+- [2025-01-22 12:13:59] 14. satır başarıyla aktarıldı
+- [2025-01-22 12:14:05] 15. satır başarıyla aktarıldı
+- [2025-01-22 12:14:10] 16. satır başarıyla aktarıldı
+- [2025-01-22 12:14:15] 17. satır başarıyla aktarıldı
+- [2025-01-22 12:14:19] 18. satır başarıyla aktarıldı
+- [2025-01-22 12:14:24] 19. satır başarıyla aktarıldı
+- [2025-01-22 12:14:28] 20. satır başarıyla aktarıldı
+- [2025-01-22 12:14:33] 21. satır başarıyla aktarıldı
+- [2025-01-22 12:14:38] 22. satır başarıyla aktarıldı
+- [2025-01-22 12:14:43] 23. satır başarıyla aktarıldı
+- [2025-01-22 12:14:48] 24. satır başarıyla aktarıldı
+- [2025-01-22 12:14:52] 25. satır başarıyla aktarıldı
+- [2025-01-22 12:14:57] 26. satır başarıyla aktarıldı
+- [2025-01-22 12:15:01] 27. satır başarıyla aktarıldı
+- [2025-01-22 12:15:03] 28. satır başarıyla aktarıldı
+- [2025-01-22 12:15:04] 29. satır başarıyla aktarıldı
+- [2025-01-22 12:15:06] 30. satır başarıyla aktarıldı
+- [2025-01-22 12:15:08] 31. satır başarıyla aktarıldı
+- [2025-01-22 12:15:10] 32. satır başarıyla aktarıldı
+- [2025-01-22 12:15:11] 33. satır başarıyla aktarıldı
+- [2025-01-22 12:15:13] 34. satır başarıyla aktarıldı
+- [2025-01-22 12:15:15] 35. satır başarıyla aktarıldı
+- [2025-01-22 12:15:17] 36. satır başarıyla aktarıldı
+- [2025-01-22 12:15:18] 37. satır başarıyla aktarıldı
+- [2025-01-22 12:15:20] 38. satır başarıyla aktarıldı
+- [2025-01-22 12:15:24] 39. satır başarıyla aktarıldı
+- [2025-01-22 12:15:27] 40. satır başarıyla aktarıldı
+- [2025-01-22 12:15:29] 41. satır başarıyla aktarıldı
+- [2025-01-22 12:15:31] 42. satır başarıyla aktarıldı
+- [2025-01-22 12:15:33] 43. satır başarıyla aktarıldı
+- [2025-01-22 12:15:35] 44. satır başarıyla aktarıldı
+- [2025-01-22 12:15:37] 45. satır başarıyla aktarıldı
+- [2025-01-22 12:15:38] 46. satır başarıyla aktarıldı
+- [2025-01-22 12:15:40] 47. satır başarıyla aktarıldı
+- [2025-01-22 12:15:41] 48. satır başarıyla aktarıldı
+- [2025-01-22 12:15:43] 49. satır başarıyla aktarıldı
+- [2025-01-22 12:15:45] 50. satır başarıyla aktarıldı
+- [2025-01-22 12:15:49] 51. satır başarıyla aktarıldı
+- [2025-01-22 12:15:51] 52. satır başarıyla aktarıldı
+- [2025-01-22 12:15:53] 53. satır başarıyla aktarıldı
+- [2025-01-22 12:15:54] 54. satır başarıyla aktarıldı
+- [2025-01-22 12:15:57] 55. satır başarıyla aktarıldı
+- [2025-01-22 12:15:59] 56. satır başarıyla aktarıldı
+- [2025-01-22 12:16:01] 57. satır başarıyla aktarıldı
+- [2025-01-22 12:16:02] 58. satır başarıyla aktarıldı
+- [2025-01-22 12:16:04] 59. satır başarıyla aktarıldı
+- [2025-01-22 12:16:06] 60. satır başarıyla aktarıldı
+- [2025-01-22 12:16:07] 61. satır başarıyla aktarıldı
+- [2025-01-22 12:16:10] 62. satır başarıyla aktarıldı
+- [2025-01-22 12:16:12] 63. satır başarıyla aktarıldı
+- [2025-01-22 12:16:14] 64. satır başarıyla aktarıldı
+- [2025-01-22 12:16:16] 65. satır başarıyla aktarıldı
+- [2025-01-22 12:16:18] 66. satır başarıyla aktarıldı
+- [2025-01-22 12:16:19] 67. satır başarıyla aktarıldı
+- [2025-01-22 12:16:21] 68. satır başarıyla aktarıldı
+- [2025-01-22 12:16:23] 69. satır başarıyla aktarıldı
+- [2025-01-22 12:16:25] 70. satır başarıyla aktarıldı
+- [2025-01-22 12:16:27] 71. satır başarıyla aktarıldı
+- [2025-01-22 12:16:29] 72. satır başarıyla aktarıldı
+- [2025-01-22 12:16:31] 73. satır başarıyla aktarıldı
+- [2025-01-22 12:16:33] 74. satır başarıyla aktarıldı
+- [2025-01-22 12:16:35] 75. satır başarıyla aktarıldı
+- [2025-01-22 12:16:36] 76. satır başarıyla aktarıldı
+- [2025-01-22 12:16:38] 77. satır başarıyla aktarıldı
+- [2025-01-22 12:16:40] 78. satır başarıyla aktarıldı
+- [2025-01-22 12:16:42] 79. satır başarıyla aktarıldı
+- [2025-01-22 12:16:44] 80. satır başarıyla aktarıldı
+- [2025-01-22 12:16:45] 81. satır başarıyla aktarıldı
+- [2025-01-22 12:16:48] 82. satır başarıyla aktarıldı
+- [2025-01-22 12:16:49] 83. satır başarıyla aktarıldı
+- [2025-01-22 12:16:51] 84. satır başarıyla aktarıldı
+- [2025-01-22 12:16:53] 85. satır başarıyla aktarıldı
+- [2025-01-22 12:16:55] 86. satır başarıyla aktarıldı
+- [2025-01-22 12:16:57] 87. satır başarıyla aktarıldı
+- [2025-01-22 12:16:59] 88. satır başarıyla aktarıldı
+- [2025-01-22 12:17:00] 89. satır başarıyla aktarıldı
+- [2025-01-22 12:17:04] 90. satır başarıyla aktarıldı
+- [2025-01-22 12:17:11] 91. satır başarıyla aktarıldı
+- [2025-01-22 12:17:16] 92. satır başarıyla aktarıldı
+- [2025-01-22 12:17:20] 93. satır başarıyla aktarıldı
+- [2025-01-22 12:17:25] 94. satır başarıyla aktarıldı
+- [2025-01-22 12:17:29] 95. satır başarıyla aktarıldı
+- [2025-01-22 12:17:36] 96. satır başarıyla aktarıldı
+- [2025-01-22 12:17:40] 97. satır başarıyla aktarıldı
+- [2025-01-22 12:17:45] 98. satır başarıyla aktarıldı
+- [2025-01-22 12:17:50] 99. satır başarıyla aktarıldı
+- [2025-01-22 12:17:54] 100. satır başarıyla aktarıldı
+- [2025-01-22 12:17:59] 101. satır başarıyla aktarıldı
+- [2025-01-22 12:18:04] 102. satır başarıyla aktarıldı
+- [2025-01-22 12:18:09] 103. satır başarıyla aktarıldı
+- [2025-01-22 12:18:13] 104. satır başarıyla aktarıldı
+- [2025-01-22 12:18:18] 105. satır başarıyla aktarıldı
+- [2025-01-22 12:18:22] 106. satır başarıyla aktarıldı
+- [2025-01-22 12:18:27] 107. satır başarıyla aktarıldı
+- [2025-01-22 12:18:31] 108. satır başarıyla aktarıldı
+- [2025-01-22 12:18:36] 109. satır başarıyla aktarıldı
+- [2025-01-22 12:18:41] 110. satır başarıyla aktarıldı
+- [2025-01-22 12:18:45] 111. satır başarıyla aktarıldı
+- [2025-01-22 12:18:50] 112. satır başarıyla aktarıldı
+- [2025-01-22 12:18:56] 113. satır başarıyla aktarıldı
+- [2025-01-22 12:19:07] 114. satır başarıyla aktarıldı
+- [2025-01-22 12:19:17] 115. satır başarıyla aktarıldı
+- [2025-01-22 12:19:23] 116. satır başarıyla aktarıldı
+- [2025-01-22 12:19:28] 117. satır başarıyla aktarıldı
+- [2025-01-22 12:19:32] 118. satır başarıyla aktarıldı
+- [2025-01-22 12:19:37] 119. satır başarıyla aktarıldı
+- [2025-01-22 12:19:41] 120. satır başarıyla aktarıldı
+- [2025-01-22 12:19:46] 121. satır başarıyla aktarıldı
+- [2025-01-22 12:19:51] 122. satır başarıyla aktarıldı
+- [2025-01-22 12:19:56] 123. satır başarıyla aktarıldı
+- [2025-01-22 12:20:00] 124. satır başarıyla aktarıldı
+- [2025-01-22 12:20:05] 125. satır başarıyla aktarıldı
+- [2025-01-22 12:20:11] 126. satır başarıyla aktarıldı
+- [2025-01-22 12:20:15] 127. satır başarıyla aktarıldı
+- [2025-01-22 12:20:20] 128. satır başarıyla aktarıldı
+- [2025-01-22 12:20:25] 129. satır başarıyla aktarıldı
+- [2025-01-22 12:20:29] 130. satır başarıyla aktarıldı
+- [2025-01-22 12:20:34] 131. satır başarıyla aktarıldı
+- [2025-01-22 12:20:38] 132. satır başarıyla aktarıldı
+- [2025-01-22 12:20:45] 133. satır başarıyla aktarıldı
+- [2025-01-22 12:20:50] 134. satır başarıyla aktarıldı
+- [2025-01-22 12:20:55] 135. satır başarıyla aktarıldı
+- [2025-01-22 12:21:00] 136. satır başarıyla aktarıldı
+- [2025-01-22 12:21:05] 137. satır başarıyla aktarıldı
+- [2025-01-22 12:21:11] 138. satır başarıyla aktarıldı
+- [2025-01-22 12:21:16] 139. satır başarıyla aktarıldı
+- [2025-01-22 12:21:21] 140. satır başarıyla aktarıldı
+- [2025-01-22 12:21:25] SharePoint bağlantısı kapatıldı
+- [2025-01-22 12:28:30] Starting import process...
+- [2025-01-22 12:28:30] SharePoint sitesine bağlanılıyor: https://tspglobalcom.sharepoint.com/sites/esh/
+- [2025-01-22 12:28:31] SharePoint liste sütunları getiriliyor: Bakım - Envanter Listesi
+- [2025-01-22 12:28:40] Excel dosyası okunuyor: tobeimported_excel.xlsx
+- [2025-01-22 12:28:48] Excel sütun başlıkları SharePoint InternalName değerleri ile güncelleniyor ve yeni dosya oluşturuluyor: tobeimported_excel_last.xlsx
+- [2025-01-22 12:28:48] Excel sütun başlıkları başarıyla güncellendi ve yeni dosya oluşturuldu
+- [2025-01-22 12:28:48] Güncellenmiş Excel dosyası okunuyor: tobeimported_excel_last.xlsx
+- [2025-01-22 12:28:49] Toplam 9254 satır bulundu
+- [2025-01-22 12:28:55] 1. satır başarıyla aktarıldı
+- [2025-01-22 12:28:55] 1. satır aktarılamadı: Method invocation failed because [System.Object[]] does not contain a method named 'op_Addition'.
+- [2025-01-22 12:29:00] 2. satır başarıyla aktarıldı
+- [2025-01-22 12:29:00] 2. satır aktarılamadı: Method invocation failed because [System.Object[]] does not contain a method named 'op_Addition'.
+- [2025-01-22 12:29:04] 3. satır başarıyla aktarıldı
+- [2025-01-22 12:29:04] 3. satır aktarılamadı: Method invocation failed because [System.Object[]] does not contain a method named 'op_Addition'.
+- [2025-01-22 12:29:09] SharePoint bağlantısı kapatıldı
+- [2025-01-22 12:30:54] Starting import process...
+- [2025-01-22 12:30:54] SharePoint sitesine bağlanılıyor: https://tspglobalcom.sharepoint.com/sites/esh/
+- [2025-01-22 12:30:55] SharePoint liste sütunları getiriliyor: Bakım - Envanter Listesi
+- [2025-01-22 12:30:58] Excel dosyası okunuyor: tobeimported_excel.xlsx
+- [2025-01-22 12:31:13] Excel sütun başlıkları SharePoint InternalName değerleri ile güncelleniyor ve yeni dosya oluşturuluyor: tobeimported_excel_last.xlsx
+- [2025-01-22 12:31:14] Excel sütun başlıkları başarıyla güncellendi ve yeni dosya oluşturuldu
+- [2025-01-22 12:31:14] Güncellenmiş Excel dosyası okunuyor: tobeimported_excel_last.xlsx
+- [2025-01-22 12:31:15] Toplam 9254 satır bulundu
+- [2025-01-22 12:31:17] 1. satır başarıyla aktarıldı
+- [2025-01-22 12:31:19] 2. satır başarıyla aktarıldı
+- [2025-01-22 12:31:21] 3. satır başarıyla aktarıldı
+- [2025-01-22 12:31:24] SharePoint bağlantısı kapatıldı
+- [2025-01-22 12:33:29] Starting import process...
+- [2025-01-22 12:33:29] SharePoint sitesine bağlanılıyor: https://tspglobalcom.sharepoint.com/sites/esh/
+- [2025-01-22 12:33:31] SharePoint liste sütunları getiriliyor: Bakım - Envanter Listesi
+- [2025-01-22 12:33:34] Excel dosyası okunuyor: tobeimported_excel.xlsx
+- [2025-01-22 12:33:36] Excel sütun başlıkları SharePoint InternalName değerleri ile güncelleniyor ve yeni dosya oluşturuluyor: tobeimported_excel_last.xlsx
+- [2025-01-22 12:33:36] Excel sütun başlıkları başarıyla güncellendi ve yeni dosya oluşturuldu
+- [2025-01-22 12:33:36] Güncellenmiş Excel dosyası okunuyor: tobeimported_excel_last.xlsx
+- [2025-01-22 12:33:36] Toplam 2 satır bulundu
+- [2025-01-22 12:33:42] 1. satır başarıyla aktarıldı
+- [2025-01-22 12:33:46] 2. satır başarıyla aktarıldı
+- [2025-01-22 12:33:46] Aktarım tamamlandı. Başarılı: 2, Başarısız: 0, Toplam: 2
+- [2025-01-22 12:33:46] SharePoint bağlantısı kapatıldı
+- [2025-01-22 12:34:44] Starting import process...
+- [2025-01-22 12:34:44] SharePoint sitesine bağlanılıyor: https://tspglobalcom.sharepoint.com/sites/esh/
+- [2025-01-22 12:34:45] SharePoint liste sütunları getiriliyor: Bakım - Envanter Listesi
+- [2025-01-22 12:34:48] Excel dosyası okunuyor: tobeimported_excel.xlsx
+- [2025-01-22 12:34:50] Excel sütun başlıkları SharePoint InternalName değerleri ile güncelleniyor ve yeni dosya oluşturuluyor: tobeimported_excel_last.xlsx
+- [2025-01-22 12:34:50] Excel sütun başlıkları başarıyla güncellendi ve yeni dosya oluşturuldu
+- [2025-01-22 12:34:50] Güncellenmiş Excel dosyası okunuyor: tobeimported_excel_last.xlsx
+- [2025-01-22 12:34:51] Toplam 2 satır bulundu
+- [2025-01-22 12:34:53] 1. satır başarıyla aktarıldı
+- [2025-01-22 12:34:55] 2. satır başarıyla aktarıldı
+- [2025-01-22 12:34:55] Aktarım tamamlandı. Başarılı: 2, Başarısız: 0, Toplam: 2
+- [2025-01-22 12:34:55] SharePoint bağlantısı kapatıldı
+- [2025-01-22 12:35:36] Starting import process...
+- [2025-01-22 12:35:36] SharePoint sitesine bağlanılıyor: https://tspglobalcom.sharepoint.com/sites/esh/
+- [2025-01-22 12:35:38] SharePoint liste sütunları getiriliyor: Bakım - Envanter Listesi
+- [2025-01-22 12:35:40] Excel dosyası okunuyor: tobeimported_excel.xlsx
+- [2025-01-22 12:35:42] Excel sütun başlıkları SharePoint InternalName değerleri ile güncelleniyor ve yeni dosya oluşturuluyor: tobeimported_excel_last.xlsx
+- [2025-01-22 12:35:42] Excel sütun başlıkları başarıyla güncellendi ve yeni dosya oluşturuldu
+- [2025-01-22 12:35:42] Güncellenmiş Excel dosyası okunuyor: tobeimported_excel_last.xlsx
+- [2025-01-22 12:35:42] Toplam 2 satır bulundu
+- [2025-01-22 12:35:44] 1. satır başarıyla aktarıldı
+- [2025-01-22 12:35:47] 2. satır başarıyla aktarıldı
+- [2025-01-22 12:35:47] Aktarım tamamlandı. Başarılı: 2, Başarısız: 0, Toplam: 2
+- [2025-01-22 12:35:47] SharePoint bağlantısı kapatıldı
+- [2025-01-22 12:36:53] Starting import process...
+- [2025-01-22 12:36:53] SharePoint sitesine bağlanılıyor: https://tspglobalcom.sharepoint.com/sites/esh/
+- [2025-01-22 12:36:55] SharePoint liste sütunları getiriliyor: Bakım - Envanter Listesi
+- [2025-01-22 12:37:01] Excel dosyası okunuyor: tobeimported_excel.xlsx
+- [2025-01-22 12:37:05] Excel sütun başlıkları SharePoint InternalName değerleri ile güncelleniyor ve yeni dosya oluşturuluyor: tobeimported_excel_last.xlsx
+- [2025-01-22 12:37:05] Excel sütun başlıkları başarıyla güncellendi ve yeni dosya oluşturuldu
+- [2025-01-22 12:37:05] Güncellenmiş Excel dosyası okunuyor: tobeimported_excel_last.xlsx
+- [2025-01-22 12:37:05] Toplam 2 satır bulundu
+- [2025-01-22 12:37:11] 1. satır başarıyla aktarıldı
+- [2025-01-22 12:37:16] 2. satır başarıyla aktarıldı
+- [2025-01-22 12:37:16] Aktarım tamamlandı. Başarılı: 2, Başarısız: 0, Toplam: 2
+- [2025-01-22 12:37:16] SharePoint bağlantısı kapatıldı
+- [2025-01-22 12:37:29] Starting import process...
+- [2025-01-22 12:37:29] SharePoint sitesine bağlanılıyor: https://tspglobalcom.sharepoint.com/sites/esh/
+- [2025-01-22 12:37:31] SharePoint liste sütunları getiriliyor: Bakım - Envanter Listesi
+- [2025-01-22 12:37:38] Excel dosyası okunuyor: tobeimported_excel.xlsx
+- [2025-01-22 12:37:41] Excel sütun başlıkları SharePoint InternalName değerleri ile güncelleniyor ve yeni dosya oluşturuluyor: tobeimported_excel_last.xlsx
+- [2025-01-22 12:37:41] Excel sütun başlıkları başarıyla güncellendi ve yeni dosya oluşturuldu
+- [2025-01-22 12:37:41] Güncellenmiş Excel dosyası okunuyor: tobeimported_excel_last.xlsx
+- [2025-01-22 12:37:41] Toplam 2 satır bulundu
+- [2025-01-22 12:37:46] 1. satır başarıyla aktarıldı
+- [2025-01-22 12:37:51] 2. satır başarıyla aktarıldı
+- [2025-01-22 12:37:51] Aktarım tamamlandı. Başarılı: 2, Başarısız: 0, Toplam: 2
+- [2025-01-22 12:37:51] SharePoint bağlantısı kapatıldı
+- [2025-01-22 12:40:38] Starting import process...
+- [2025-01-22 12:40:38] SharePoint sitesine bağlanılıyor: https://tspglobalcom.sharepoint.com/sites/esh/
+- [2025-01-22 12:40:41] SharePoint liste sütunları getiriliyor: Bakım - Envanter Listesi
+- [2025-01-22 12:40:44] Excel dosyası okunuyor: tobeimported_excel.xlsx
+- [2025-01-22 12:40:47] Excel sütun başlıkları SharePoint InternalName değerleri ile güncelleniyor ve yeni dosya oluşturuluyor: tobeimported_excel_last.xlsx
+- [2025-01-22 12:40:47] Excel sütun başlıkları başarıyla güncellendi ve yeni dosya oluşturuldu
+- [2025-01-22 12:40:47] Güncellenmiş Excel dosyası okunuyor: tobeimported_excel_last.xlsx
+- [2025-01-22 12:40:47] Toplam 2 satır bulundu
+- [2025-01-22 12:40:49] 1. satır başarıyla aktarıldı
+- [2025-01-22 12:40:51] 2. satır başarıyla aktarıldı
+- [2025-01-22 12:40:51] Aktarım tamamlandı. Başarılı: 2, Başarısız: 0, Toplam: 2
+- [2025-01-22 12:40:51] SharePoint bağlantısı kapatıldı
+- [2025-01-22 12:40:57] Starting import process...
+- [2025-01-22 12:41:02] SharePoint sitesine bağlanılıyor: https://tspglobalcom.sharepoint.com/sites/esh/
+- [2025-01-22 12:41:03] SharePoint liste sütunları getiriliyor: Bakım - Envanter Listesi
+- [2025-01-22 12:41:06] Excel dosyası okunuyor: tobeimported_excel.xlsx
+- [2025-01-22 12:41:08] Excel sütun başlıkları SharePoint InternalName değerleri ile güncelleniyor ve yeni dosya oluşturuluyor: tobeimported_excel_last.xlsx
+- [2025-01-22 12:41:08] Excel sütun başlıkları başarıyla güncellendi ve yeni dosya oluşturuldu
+- [2025-01-22 12:41:08] Güncellenmiş Excel dosyası okunuyor: tobeimported_excel_last.xlsx
+- [2025-01-22 12:41:08] Toplam 2 satır bulundu
+- [2025-01-22 12:41:10] 1. satır başarıyla aktarıldı
+- [2025-01-22 12:41:12] 2. satır başarıyla aktarıldı
+- [2025-01-22 12:41:12] Aktarım tamamlandı. Başarılı: 2, Başarısız: 0, Toplam: 2
+- [2025-01-22 12:41:12] SharePoint bağlantısı kapatıldı
+- [2025-01-22 12:46:00] Starting import process...
+- [2025-01-22 12:46:00] SharePoint sitesine bağlanılıyor: https://tspglobalcom.sharepoint.com/sites/esh/
+- [2025-01-22 12:46:02] SharePoint liste sütunları getiriliyor: Bakım - Envanter Listesi
+- [2025-01-22 12:46:08] Excel dosyası okunuyor: tobeimported_excel.xlsx
+- [2025-01-22 12:46:13] Excel sütun başlıkları SharePoint InternalName değerleri ile güncelleniyor ve yeni dosya oluşturuluyor: tobeimported_excel_last.xlsx
+- [2025-01-22 12:46:13] Excel sütun başlıkları başarıyla güncellendi ve yeni dosya oluşturuldu
+- [2025-01-22 12:46:13] Güncellenmiş Excel dosyası okunuyor: tobeimported_excel_last.xlsx
+- [2025-01-22 12:46:13] Toplam 2 satır bulundu
+- [2025-01-22 12:46:18] 1. satır başarıyla aktarıldı
+- [2025-01-22 12:46:26] 2. satır başarıyla aktarıldı
+- [2025-01-22 12:46:26] Aktarım tamamlandı. Başarılı: 2, Başarısız: 0, Toplam: 2
+- [2025-01-22 12:46:26] SharePoint bağlantısı kapatıldı
+- [2025-01-22 12:47:27] Starting import process...
+- [2025-01-22 12:47:27] SharePoint sitesine bağlanılıyor: https://tspglobalcom.sharepoint.com/sites/esh/
+- [2025-01-22 12:47:29] SharePoint liste sütunları getiriliyor: Bakım - Envanter Listesi
+- [2025-01-22 12:47:35] Excel dosyası okunuyor: tobeimported_excel.xlsx
+- [2025-01-22 12:47:37] Excel sütun başlıkları SharePoint InternalName değerleri ile güncelleniyor ve yeni dosya oluşturuluyor: tobeimported_excel_last.xlsx
+- [2025-01-22 12:47:37] Excel sütun başlıkları başarıyla güncellendi ve yeni dosya oluşturuldu
+- [2025-01-22 12:47:37] Güncellenmiş Excel dosyası okunuyor: tobeimported_excel_last.xlsx
+- [2025-01-22 12:47:38] Hata: Failed importing the Excel workbook 'C:\_Projects\NewSP_ImportFromExcelPS\tobeimported_excel_last.xlsx' with worksheet '': Duplicate column headers found on row '1' in columns '14 15'. Column headers must be unique, if this is not a requirement please use the '-NoHeader' or '-HeaderName' parameter.
+- [2025-01-22 12:47:38] SharePoint bağlantısı kapatıldı
+- [2025-01-22 12:50:31] Starting import process...
+- [2025-01-22 12:50:31] SharePoint sitesine bağlanılıyor: https://tspglobalcom.sharepoint.com/sites/esh/
+- [2025-01-22 12:50:33] SharePoint liste sütunları getiriliyor: Bakım - Envanter Listesi
+- [2025-01-22 12:50:40] Excel dosyası okunuyor: tobeimported_excel.xlsx
+- [2025-01-22 12:50:43] Excel sütun başlıkları SharePoint InternalName değerleri ile güncelleniyor ve yeni dosya oluşturuluyor: tobeimported_excel_last.xlsx
+- [2025-01-22 12:50:43] Excel sütun başlıkları başarıyla güncellendi ve yeni dosya oluşturuldu
+- [2025-01-22 12:50:43] Excel sütun başlıkları başarıyla güncellendi ve yeni dosya oluşturuldu
+- [2025-01-22 12:50:43] Güncellenmiş Excel dosyası okunuyor: tobeimported_excel_last.xlsx
+- [2025-01-22 12:50:43] Toplam 2 satır bulundu
+- [2025-01-22 12:50:43] 1. satır daha önce aktarılmış, atlandı
+- [2025-01-22 12:50:43] 2. satır daha önce aktarılmış, atlandı
+- [2025-01-22 12:50:43] Aktarım tamamlandı. Başarılı: 0, Başarısız: 0, Toplam: 2
+- [2025-01-22 12:50:43] SharePoint bağlantısı kapatıldı
+- [2025-01-22 13:09:43] ℹ Starting import process...
+- [2025-01-22 13:09:43] ℹ SharePoint sitesine bağlanılıyor: https://tspglobalcom.sharepoint.com/sites/esh/
+- [2025-01-22 13:09:45] ℹ SharePoint liste sütunları getiriliyor: Bakım - Envanter Listesi
+- [2025-01-22 13:09:48] ℹ Excel dosyası okunuyor: tobeimported_excel.xlsx
+- [2025-01-22 13:10:05] ℹ Excel sütun başlıkları SharePoint InternalName değerleri ile güncelleniyor ve yeni dosya oluşturuluyor: tobeimported_excel_last.xlsx
+- [2025-01-22 13:10:05] ℹ Excel sütun başlıkları başarıyla güncellendi ve yeni dosya oluşturuldu
+- [2025-01-22 13:10:05] ℹ Güncellenmiş Excel dosyası okunuyor: tobeimported_excel_last.xlsx
+- [2025-01-22 13:10:05] ℹ Toplam 2 satır bulundu
+- [2025-01-22 13:10:05] ℹ 1. satır daha önce aktarılmış, atlandı
+- [2025-01-22 13:10:05] ℹ 2. satır daha önce aktarılmış, atlandı
+- [2025-01-22 13:10:05] ✓ Aktarım tamamlandı. Başarılı: 0, Başarısız: 0, Toplam: 2
+- [2025-01-22 13:10:05] ℹ SharePoint bağlantısı kapatıldı
