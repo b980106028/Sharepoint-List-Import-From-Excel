@@ -1,0 +1,16 @@
+# Environment variables
+.env
+
+# Excel files
+*.xlsx
+*.xls
+
+# PowerShell logs
+*.log
+
+# Progress file
+Progress.MD
+
+# Windows system files
+Thumbs.db
+desktop.ini

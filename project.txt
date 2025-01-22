@@ -1,0 +1,12 @@
+Excel'den Sharepoint listesine veri aktarılacak.
+Excel'den kaç satır eklenecek bunun bilgisini ekrana yazdır.
+Eklenen her öğe için başarılı olup olmadığını göreyim. Progressi görebileyim.
+Excel'deki ilk satır kolon isimleridir. 
+excel listesi: tobeimported_excel
+SHAREPOINT_URL=https://tspglobalcom.sharepoint.com/sites/esh/
+LIST_NAME=Bakım - Envanter Listesi
+Değişkenleri .env dosyasına kaydet ve oradan oku. 
+Web Authentication ile oturum açılsın ve her hatada farklı authentication methodu kullanılmasın. MFA etkindir ona göre ayarla. bu methoda sağdık kalınsın.
+kullanılacak dil: Powershell
+gerekli modüller için scriptin başında yüklü olup olmadığını kontrol et. yüklü değilse script çalışırken yükle.
+Özet olarak ne yapıldığını Progress.MD dosyasına adım adım yaz ve her güncellemede çıkarılan (eklenmiş ama çıkarılmış olanların üzerini çizerek) ve eklenenleri not et. 
