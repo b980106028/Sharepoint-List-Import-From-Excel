@@ -36,9 +36,13 @@ function Write-Section {
         [string]$Title
     )
     
-    Write-Host "`n┌─────────────────────────────────────┐" -ForegroundColor DarkCyan
-    Write-Host "│ $Title" -ForegroundColor DarkCyan
-    Write-Host "└─────────────────────────────────────┘" -ForegroundColor DarkCyan
+    $width = 37
+    $line = "─" * ($width - 2)
+    Write-Host ""
+    Write-Host "┌$line┐" -ForegroundColor DarkCyan
+    Write-Host "│ $Title$(" " * ($width - $Title.Length - 3))│" -ForegroundColor Cyan
+    Write-Host "└$line┘" -ForegroundColor DarkCyan
+    Write-Host ""
 }
 
 # Function to write formatted status
@@ -135,13 +139,13 @@ function Update-ExcelColumnNames {
         $excel | Close-ExcelPackage -NoSave:$false
         Copy-Item -Path $ExcelPath -Destination $NewExcelPath -Force
         
-        Write-Host "Excel sütun başlıkları başarıyla güncellendi ve yeni dosya oluşturuldu"
-        Write-ProgressToMD "Excel sütun başlıkları başarıyla güncellendi ve yeni dosya oluşturuldu"
+        Write-Host "Excel column names updated and new file created"
+        Write-ProgressToMD "Excel column names updated and new file created"
         
     }
     catch {
-        Write-Host "Excel güncellenirken hata oluştu: $($_.Exception.Message)" -ForegroundColor Red
-        Write-ProgressToMD "Excel güncellenirken hata oluştu: $($_.Exception.Message)"
+        Write-Host "Error updating Excel: $($_.Exception.Message)" -ForegroundColor Red
+        Write-ProgressToMD "Error updating Excel: $($_.Exception.Message)"
         throw
     }
 }
@@ -157,7 +161,7 @@ function Update-ImportStatus {
         $excel = Open-ExcelPackage -Path $ExcelPath
         $worksheet = $excel.Workbook.Worksheets[1]
         
-        # ImportStatus kolonunu bul
+        # Find ImportStatus column
         $importStatusColumn = 1
         $importStatusFound = $false
         
@@ -170,21 +174,21 @@ function Update-ImportStatus {
         }
         
         if ($importStatusFound) {
-            # ImportStatus değerini 1 olarak güncelle
+            # Update ImportStatus value to 1
             # RowNumber 1'den başlıyor (ilk veri satırı) ve biz bunu Excel'de 2. satıra yazmalıyız (1. satır başlık)
             $actualRow = $RowNumber + 1
             $worksheet.Cells[$actualRow, $importStatusColumn].Value = 1
             
-            # Excel'i kaydet ve kapat
+            # Save Excel and close
             $excel | Close-ExcelPackage -NoSave:$false
-            Write-Host "Excel güncellendi: $ExcelPath - Satır: $RowNumber"
+            Write-Host "Excel updated: $ExcelPath - Row: $RowNumber"
         }
         else {
-            Write-Host "ImportStatus kolonu bulunamadı: $ExcelPath" -ForegroundColor Yellow
+            Write-Host "ImportStatus column not found: $ExcelPath" -ForegroundColor Yellow
         }
     }
     catch {
-        Write-Host "Excel güncellenirken hata oluştu: $ExcelPath - Satır: $RowNumber - Hata: $($_.Exception.Message)" -ForegroundColor Red
+        Write-Host "Error updating Excel: $ExcelPath - Row: $RowNumber - Error: $($_.Exception.Message)" -ForegroundColor Red
     }
 }
 
@@ -226,13 +230,56 @@ function Wait-ForExcelFiles {
     $filesInUse = Test-ExcelFilesInUse -SourceExcel $SourceExcel -UpdatedExcel $UpdatedExcel
     
     while ($filesInUse.Count -gt 0) {
-        Write-Host "Lütfen aşağıdaki Excel dosyalarını kapatın:" -ForegroundColor Yellow
+        Write-Host "Please close the following Excel files:" -ForegroundColor Yellow
         $filesInUse | ForEach-Object { Write-Host "- $_" -ForegroundColor Yellow }
-        Write-Host "Dosyaları kapattıktan sonra devam etmek için Enter'a basın..." -ForegroundColor Yellow
+        Write-Host "Press Enter to continue after closing the files..." -ForegroundColor Yellow
         
         $null = Read-Host
         $filesInUse = Test-ExcelFilesInUse -SourceExcel $SourceExcel -UpdatedExcel $UpdatedExcel
     }
+}
+
+# Function to display mapping table
+function Write-MappingTable {
+    param (
+        [hashtable]$Mapping,
+        [object[]]$SharePointColumns
+    )
+    
+    Write-Section "Column Mapping Preview"
+    
+    $format = "│ {0,-30} │ {1,-30} │ {2,-30} │"
+    $line = "─" * 97
+    $header = "┌" + ("─" * 32) + "┬" + ("─" * 32) + "┬" + ("─" * 32) + "┐"
+    $separator = "├" + ("─" * 32) + "┼" + ("─" * 32) + "┼" + ("─" * 32) + "┤"
+    $footer = "└" + ("─" * 32) + "┴" + ("─" * 32) + "┴" + ("─" * 32) + "┘"
+    
+    Write-Host
+    Write-Host $header -ForegroundColor DarkCyan
+    Write-Host ($format -f "Excel Column", "SharePoint Title", "SharePoint Internal") -ForegroundColor Cyan
+    Write-Host $separator -ForegroundColor DarkCyan
+    
+    foreach ($map in $Mapping.GetEnumerator() | Sort-Object Key) {
+        $spColumn = $SharePointColumns | Where-Object { $_.InternalName -eq $map.Value }
+        if ($spColumn) {
+            Write-Host ($format -f $map.Key, $spColumn.Title, $map.Value) -ForegroundColor White
+        } else {
+            Write-Host ($format -f $map.Key, "NOT FOUND", "NOT FOUND") -ForegroundColor Red
+        }
+    }
+    
+    Write-Host $footer -ForegroundColor DarkCyan
+    Write-Host
+    
+    # Display statistics
+    $totalColumns = $Mapping.Count
+    $matchedColumns = ($SharePointColumns | Where-Object { $Mapping.ContainsValue($_.InternalName) }).Count
+    
+    Write-Host "Statistics:" -ForegroundColor DarkCyan
+    Write-Host "• Total Excel Columns: $totalColumns" -ForegroundColor White
+    Write-Host "• Matched Columns: $matchedColumns" -ForegroundColor Green
+    Write-Host "• Unmatched Columns: $($totalColumns - $matchedColumns)" -ForegroundColor $(if ($totalColumns - $matchedColumns -gt 0) { "Red" } else { "Green" })
+    Write-Host
 }
 
 # Load environment variables
@@ -269,14 +316,14 @@ try {
     
     # Connect to SharePoint
     Write-Section "SharePoint Connection"
-    Write-Status "Connecting to SharePoint..." -Status "info" -Color Yellow
-    Write-ProgressToMD "SharePoint sitesine bağlanılıyor: $env:SHAREPOINT_URL"
+    Write-Status "Connecting to SharePoint site..." -Status "info" -Color Yellow
+    Write-ProgressToMD "Connecting to SharePoint site: $env:SHAREPOINT_URL"
     
-    Connect-PnPOnline -Url $env:SHAREPOINT_URL -UseWebLogin
+    Connect-PnPOnline -Url $env:SHAREPOINT_URL -UseWebLogin -WarningAction SilentlyContinue
     
     # Get SharePoint list columns
     Write-Status "Getting SharePoint list columns..." -Status "info" -Color Yellow
-    Write-ProgressToMD "SharePoint liste sütunları getiriliyor: $env:LIST_NAME"
+    Write-ProgressToMD "Getting SharePoint list columns: $env:LIST_NAME"
     
     $list = Get-PnPList -Identity $env:LIST_NAME
     $listColumns = Get-PnPField -List $list | Where-Object { -not $_.Hidden -and -not $_.ReadOnly }
@@ -284,35 +331,44 @@ try {
     # Read Excel file
     Write-Section "Excel Processing"
     Write-Status "Reading Excel file..." -Status "info" -Color Yellow
-    Write-ProgressToMD "Excel dosyası okunuyor: $env:EXCEL_FILE"
+    Write-ProgressToMD "Reading Excel file: $env:EXCEL_FILE"
     
     $excelData = Import-Excel -Path $excelPath
     
-    # Create column mapping
+    # Get actual Excel columns and show debug info
+    $excelColumns = $excelData[0].PSObject.Properties.Name
+    Write-Status "Found Excel columns:" -Status "info" -Color Cyan
+    $excelColumns | ForEach-Object { Write-Status "  • $_" -Status "info" -Color White }
+    
+    # Show SharePoint columns for debugging
+    Write-Status "`nFound SharePoint columns:" -Status "info" -Color Cyan
+    $listColumns | ForEach-Object { Write-Status "  • $($_.Title) [$($_.InternalName)]" -Status "info" -Color White }
+    
+    # Create column mapping only for existing Excel columns
     $columnMapping = @{}
-    foreach ($column in $listColumns) {
-        $columnMapping[$column.Title] = $column.InternalName
+    foreach ($excelColumn in $excelColumns) {
+        $matchingColumn = $listColumns | Where-Object { 
+            $_.Title -eq $excelColumn -or 
+            $_.InternalName -eq $excelColumn -or
+            $_.Title -eq $excelColumn.Trim()
+        }
+        if ($matchingColumn) {
+            $columnMapping[$excelColumn] = $matchingColumn.InternalName
+        }
     }
     
-    # Update Excel headers
-    Write-Status "Do you want to update Excel column headers with SharePoint internal names? (E/H)" -Status "warning" -Color Yellow
-    $confirmation = Read-Host
+    # Display mapping table
+    Write-MappingTable -Mapping $columnMapping -SharePointColumns $listColumns
     
-    if ($confirmation -eq "E") {
-        $newExcelPath = Join-Path $PSScriptRoot $env:EXCEL_FILE_UPDATED
-        Write-Status "Updating Excel headers..." -Status "info" -Color Yellow
-        Write-ProgressToMD "Excel sütun başlıkları SharePoint InternalName değerleri ile güncelleniyor ve yeni dosya oluşturuluyor: $($env:EXCEL_FILE_UPDATED)"
-        Update-ExcelColumnNames -ExcelPath $excelPath -NewExcelPath $newExcelPath -ColumnMapping $columnMapping
-        
-        # Read updated Excel file
-        Write-Status "Reading updated Excel file..." -Status "info" -Color Yellow
-        Write-ProgressToMD "Güncellenmiş Excel dosyası okunuyor: $($env:EXCEL_FILE_UPDATED)"
-        $excelData = Import-Excel -Path $newExcelPath
+    if ($columnMapping.Count -eq 0) {
+        Write-Status "No column mappings found! Please check column names." -Status "error" -Color Red
+        Write-ProgressToMD "No column mappings found. Please check column names." -Status "error"
+        throw "No column mappings found. Excel columns might not match SharePoint columns."
     }
     
     $totalRows = $excelData.Count
     Write-Status "Found $totalRows rows to process" -Status "info" -Color Green
-    Write-ProgressToMD "Toplam $totalRows satır bulundu"
+    Write-ProgressToMD "Found $totalRows rows to process"
     
     # Import data to SharePoint
     Write-Section "Data Import"
@@ -325,7 +381,7 @@ try {
         # Skip if already imported
         if ($row.ImportStatus -eq 1) {
             Write-Status "Row $($i + 1) already imported, skipping..." -Status "info" -Color DarkGray
-            Write-ProgressToMD "$($i + 1). satır daha önce aktarılmış, atlandı"
+            Write-ProgressToMD "Row $($i + 1) already imported, skipping"
             continue
         }
         
@@ -339,20 +395,17 @@ try {
             
             Add-PnPListItem -List $env:LIST_NAME -Values $itemHash | Out-Null
             
-            # Update ImportStatus in both Excel files
+            # Update ImportStatus in Excel
             Update-ImportStatus -ExcelPath $excelPath -RowNumber ($i + 1)
-            if ($confirmation -eq "E") {
-                Update-ImportStatus -ExcelPath $newExcelPath -RowNumber ($i + 1)
-            }
             
             $successCount++
             Write-Status "Row $($i + 1) imported successfully" -Status "success" -Color Green
-            Write-ProgressToMD "$($i + 1). satır başarıyla aktarıldı" -Status "success"
+            Write-ProgressToMD "Row $($i + 1) imported successfully" -Status "success"
         }
         catch {
             $failureCount++
             Write-Status "Error importing row $($i + 1): $($_.Exception.Message)" -Status "error" -Color Red
-            Write-ProgressToMD "$($i + 1). satır aktarılamadı: $($_.Exception.Message)" -Status "error"
+            Write-ProgressToMD "Error importing row $($i + 1): $($_.Exception.Message)" -Status "error"
         }
     }
     
@@ -363,12 +416,7 @@ try {
     Write-Status "Failed: $failureCount" -Status "error" -Color Red
     Write-Status "Total: $totalRows" -Status "info" -Color Cyan
     
-    Write-ProgressToMD "Aktarım tamamlandı. Başarılı: $successCount, Başarısız: $failureCount, Toplam: $totalRows" -Status "success"
-    
-    # Disconnect from SharePoint
-    Disconnect-PnPOnline
-    Write-Status "SharePoint connection closed" -Status "info" -Color Yellow
-    Write-ProgressToMD "SharePoint bağlantısı kapatıldı"
+    Write-ProgressToMD "Import completed. Successful: $successCount, Failed: $failureCount, Total: $totalRows" -Status "success"
 }
 catch {
     $errorMessage = "Error: $($_.Exception.Message)"
@@ -376,9 +424,18 @@ catch {
     Write-ProgressToMD $errorMessage -Status "error"
 }
 finally {
-    if (Get-PnPConnection) {
-        Disconnect-PnPOnline
-        Write-Status "SharePoint connection closed" -Status "info" -Color Yellow
-        Write-ProgressToMD "SharePoint bağlantısı kapatıldı"
+    try {
+        # Try to get the connection state without throwing an error
+        $connection = Get-PnPConnection -ErrorAction SilentlyContinue
+        if ($null -ne $connection -and $connection.Url) {
+            Disconnect-PnPOnline -ErrorAction SilentlyContinue
+            Write-Status "SharePoint connection closed" -Status "info" -Color Yellow
+            Write-ProgressToMD "SharePoint connection closed"
+        }
+    }
+    catch {
+        # Connection might already be closed, just continue
+        Write-Status "SharePoint connection already closed" -Status "info" -Color Yellow
+        Write-ProgressToMD "SharePoint connection already closed"
     }
 }
