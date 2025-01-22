@@ -8,9 +8,6 @@
 # PowerShell logs
 *.log
 
-# Progress file
-Progress.MD
-
 # Project file
 project.txt
 

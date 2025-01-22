@@ -19,15 +19,65 @@ function Ensure-ModulesInstalled {
     }
 }
 
+# Function to write formatted header
+function Write-Header {
+    param (
+        [string]$Title
+    )
+    
+    Write-Host "`n═══════════════════════════════════════" -ForegroundColor Cyan
+    Write-Host "  $Title" -ForegroundColor Cyan
+    Write-Host "═══════════════════════════════════════" -ForegroundColor Cyan
+}
+
+# Function to write formatted section
+function Write-Section {
+    param (
+        [string]$Title
+    )
+    
+    Write-Host "`n┌─────────────────────────────────────┐" -ForegroundColor DarkCyan
+    Write-Host "│ $Title" -ForegroundColor DarkCyan
+    Write-Host "└─────────────────────────────────────┘" -ForegroundColor DarkCyan
+}
+
+# Function to write formatted status
+function Write-Status {
+    param (
+        [string]$Message,
+        [string]$Status,
+        [string]$Color = "White"
+    )
+    
+    $statusIcon = switch ($Status.ToLower()) {
+        "success" { "✓"; break }
+        "error" { "✗"; break }
+        "warning" { "!"; break }
+        "info" { "→"; break }
+        default { " "; break }
+    }
+    
+    Write-Host "  $statusIcon $Message" -ForegroundColor $Color
+}
+
 # Function to write progress to MD file
 function Write-ProgressToMD {
     param (
         [string]$Message,
+        [string]$Status = "info",
         [bool]$IsRemoved = $false
     )
     
     $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
-    $markdownLine = "- [$timestamp] "
+    $statusIcon = switch ($Status.ToLower()) {
+        "success" { "✓"; break }
+        "error" { "✗"; break }
+        "warning" { "⚠"; break }
+        "info" { "ℹ"; break }
+        default { "•"; break }
+    }
+    
+    $markdownLine = "- [$timestamp] $statusIcon "
     
     if ($IsRemoved) {
         $markdownLine += "~~$Message~~"
@@ -203,155 +253,132 @@ if (!(Test-Path "Progress.MD")) {
     Set-Content -Path "Progress.MD" -Value "# Excel to SharePoint Import Progress`n"
 }
 
+Write-Header "Excel to SharePoint Import Tool"
+Write-Status "Starting import process..." -Status "info" -Color Cyan
 Write-ProgressToMD "Starting import process..."
 
 try {
     # Check Excel file existence
     $excelPath = Join-Path $PSScriptRoot $env:EXCEL_FILE
     if (!(Test-Path $excelPath)) {
-        throw "Excel dosyası bulunamadı: $excelPath"
+        throw "Excel file not found: $excelPath"
     }
     
     # Wait until Excel files are closed
     Wait-ForExcelFiles -SourceExcel $excelPath -UpdatedExcel (Join-Path $PSScriptRoot $env:EXCEL_FILE_UPDATED)
-
-    # Connect to SharePoint
-    Write-Host "SharePoint'e bağlanılıyor..."
-    Write-ProgressToMD "SharePoint sitesine bağlanılıyor: $env:SHAREPOINT_URL"
-    Connect-PnPOnline -Url $env:SHAREPOINT_URL -UseWebLogin
-
-    # SharePoint liste sütunlarını al
-    Write-Host "`nSharePoint liste sütunları getiriliyor..."
-    Write-ProgressToMD "SharePoint liste sütunları getiriliyor: $env:LIST_NAME"
-    $list = Get-PnPList -Identity $env:LIST_NAME
-    $fields = Get-PnPField -List $list | Where-Object { -not $_.Hidden -and $_.InternalName -notlike "Computed_*" -and $_.InternalName -notlike "_*" }
     
-    Write-Host "`nListe Sütunları:"
-    Write-Host "----------------"
-    $fields | Select-Object Title, InternalName | Format-Table -AutoSize
-
-    # Excel'i oku ve sütunları göster
-    Write-Host "`nExcel dosyası okunuyor: $excelPath"
+    # Connect to SharePoint
+    Write-Section "SharePoint Connection"
+    Write-Status "Connecting to SharePoint..." -Status "info" -Color Yellow
+    Write-ProgressToMD "SharePoint sitesine bağlanılıyor: $env:SHAREPOINT_URL"
+    
+    Connect-PnPOnline -Url $env:SHAREPOINT_URL -UseWebLogin
+    
+    # Get SharePoint list columns
+    Write-Status "Getting SharePoint list columns..." -Status "info" -Color Yellow
+    Write-ProgressToMD "SharePoint liste sütunları getiriliyor: $env:LIST_NAME"
+    
+    $list = Get-PnPList -Identity $env:LIST_NAME
+    $listColumns = Get-PnPField -List $list | Where-Object { -not $_.Hidden -and -not $_.ReadOnly }
+    
+    # Read Excel file
+    Write-Section "Excel Processing"
+    Write-Status "Reading Excel file..." -Status "info" -Color Yellow
     Write-ProgressToMD "Excel dosyası okunuyor: $env:EXCEL_FILE"
     
     $excelData = Import-Excel -Path $excelPath
-    if ($null -eq $excelData -or $excelData.Count -eq 0) {
-        throw "Excel dosyası boş veya okunamadı"
-    }
-
-    # Excel sütunlarını göster
-    Write-Host "`nExcel Sütunları:"
-    Write-Host "---------------"
-    $excelColumns = $excelData[0].PSObject.Properties.Name
-    $excelColumns | ForEach-Object { Write-Host $_ }
-
-    # Eşleştirmeleri oluştur
+    
+    # Create column mapping
     $columnMapping = @{}
-    foreach ($excelCol in $excelColumns) {
-        $matchingField = $fields | Where-Object { $_.Title -eq $excelCol }
-        if ($matchingField) {
-            $columnMapping[$excelCol] = $matchingField.InternalName
-        }
+    foreach ($column in $listColumns) {
+        $columnMapping[$column.Title] = $column.InternalName
     }
-
-    # Eşleştirmeleri göster ve onay iste
-    Write-Host "`nÖnerilen Eşleştirmeler:"
-    Write-Host "----------------------"
-    foreach ($mapping in $columnMapping.GetEnumerator()) {
-        Write-Host "Excel Kolonu: $($mapping.Key)"
-        Write-Host "SharePoint Title: $($fields | Where-Object { $_.InternalName -eq $mapping.Value } | Select-Object -ExpandProperty Title)"
-        Write-Host "SharePoint InternalName: $($mapping.Value)"
-        Write-Host "----------------------------------------"
-    }
-
-    $confirmation = Read-Host "`nYukarıdaki eşleştirmeler doğru mu? Excel sütun başlıkları SharePoint InternalName değerleri ile değiştirilecek. (E/H)"
+    
+    # Update Excel headers
+    Write-Status "Do you want to update Excel column headers with SharePoint internal names? (E/H)" -Status "warning" -Color Yellow
+    $confirmation = Read-Host
     
     if ($confirmation -eq "E") {
         $newExcelPath = Join-Path $PSScriptRoot $env:EXCEL_FILE_UPDATED
-        Write-Host "`nExcel sütun başlıkları güncelleniyor ve yeni dosya oluşturuluyor: $($env:EXCEL_FILE_UPDATED)"
+        Write-Status "Updating Excel headers..." -Status "info" -Color Yellow
         Write-ProgressToMD "Excel sütun başlıkları SharePoint InternalName değerleri ile güncelleniyor ve yeni dosya oluşturuluyor: $($env:EXCEL_FILE_UPDATED)"
         Update-ExcelColumnNames -ExcelPath $excelPath -NewExcelPath $newExcelPath -ColumnMapping $columnMapping
-        Write-Host "Excel sütun başlıkları başarıyla güncellendi ve yeni dosya oluşturuldu!"
-        Write-ProgressToMD "Excel sütun başlıkları başarıyla güncellendi ve yeni dosya oluşturuldu"
-
-        # Yeni Excel dosyasını oku
-        Write-Host "`nGüncellenmiş Excel dosyası okunuyor: $newExcelPath"
+        
+        # Read updated Excel file
+        Write-Status "Reading updated Excel file..." -Status "info" -Color Yellow
         Write-ProgressToMD "Güncellenmiş Excel dosyası okunuyor: $($env:EXCEL_FILE_UPDATED)"
-        
         $excelData = Import-Excel -Path $newExcelPath
-        $totalRows = $excelData.Count
-        Write-Host "Toplam aktarılacak satır: $totalRows"
-        Write-ProgressToMD "Toplam $totalRows satır bulundu"
-
-        Write-Host "`nGüncellenmiş Excel Sütunları:"
-        Write-Host "-------------------------"
-        $excelColumns = $excelData[0].PSObject.Properties.Name
-        $excelColumns | ForEach-Object { Write-Host $_ }
-
-        # Import each row
-        $successCount = 0
-        $failureCount = 0
+    }
+    
+    $totalRows = $excelData.Count
+    Write-Status "Found $totalRows rows to process" -Status "info" -Color Green
+    Write-ProgressToMD "Toplam $totalRows satır bulundu"
+    
+    # Import data to SharePoint
+    Write-Section "Data Import"
+    $successCount = 0
+    $failureCount = 0
+    
+    for ($i = 0; $i -lt $excelData.Count; $i++) {
+        $row = $excelData[$i]
         
-        for ($i = 0; $i -lt $totalRows; $i++) {
-            $row = $excelData[$i]
-            
-            # ImportStatus 1 ise bu satırı atla
-            if ($row.ImportStatus -eq 1) {
-                Write-Host "Satır $($i + 1) daha önce aktarılmış, atlanıyor..."
-                Write-ProgressToMD "$($i + 1). satır daha önce aktarılmış, atlandı"
-                continue
+        # Skip if already imported
+        if ($row.ImportStatus -eq 1) {
+            Write-Status "Row $($i + 1) already imported, skipping..." -Status "info" -Color DarkGray
+            Write-ProgressToMD "$($i + 1). satır daha önce aktarılmış, atlandı"
+            continue
+        }
+        
+        try {
+            $itemHash = @{}
+            foreach ($column in $listColumns) {
+                if ($null -ne $row.$($column.Title)) {
+                    $itemHash[$column.InternalName] = $row.$($column.Title)
+                }
             }
             
-            $progress = [math]::Round(($i + 1) / $totalRows * 100, 2)
-            Write-Progress -Activity "SharePoint'e veriler aktarılıyor" -Status "%$progress Tamamlandı" -PercentComplete $progress
-            Write-Host "İşlenen satır $($i + 1) / $totalRows"
+            Add-PnPListItem -List $env:LIST_NAME -Values $itemHash | Out-Null
             
-            try {
-                # SharePoint'e gönderilecek özellikleri hazırla (ImportStatus hariç)
-                $itemProperties = @{}
-                $row.PSObject.Properties | Where-Object { $_.Name -ne "ImportStatus" } | ForEach-Object {
-                    if ($null -ne $_.Value) {
-                        $itemProperties[$_.Name] = $_.Value
-                    }
-                }
-                
-                # Add item to SharePoint list
-                Add-PnPListItem -List $env:LIST_NAME -Values $itemProperties
-                $successCount++
-                Write-ProgressToMD "$($i + 1). satır başarıyla aktarıldı"
-                
-                # Her iki Excel dosyasında da ImportStatus'u güncelle
-                Update-ImportStatus -ExcelPath $excelPath -RowNumber ($i + 1)
+            # Update ImportStatus in both Excel files
+            Update-ImportStatus -ExcelPath $excelPath -RowNumber ($i + 1)
+            if ($confirmation -eq "E") {
                 Update-ImportStatus -ExcelPath $newExcelPath -RowNumber ($i + 1)
             }
-            catch {
-                $failureCount++
-                Write-ProgressToMD "$($i + 1). satır aktarılamadı: $($_.Exception.Message)"
-                Write-Host "Hata - $($i + 1). satır: $($_.Exception.Message)" -ForegroundColor Red
-            }
+            
+            $successCount++
+            Write-Status "Row $($i + 1) imported successfully" -Status "success" -Color Green
+            Write-ProgressToMD "$($i + 1). satır başarıyla aktarıldı" -Status "success"
         }
-
-        # Write summary
-        $summary = "Aktarım tamamlandı. Başarılı: $successCount, Başarısız: $failureCount, Toplam: $totalRows"
-        Write-Host $summary
-        Write-ProgressToMD $summary
+        catch {
+            $failureCount++
+            Write-Status "Error importing row $($i + 1): $($_.Exception.Message)" -Status "error" -Color Red
+            Write-ProgressToMD "$($i + 1). satır aktarılamadı: $($_.Exception.Message)" -Status "error"
+        }
     }
-    else {
-        Write-Host "İşlem iptal edildi."
-        Write-ProgressToMD "Sütun eşleştirme işlemi kullanıcı tarafından iptal edildi"
-    }
+    
+    # Summary
+    Write-Section "Import Summary"
+    Write-Status "Import completed!" -Status "success" -Color Green
+    Write-Status "Successful: $successCount" -Status "success" -Color Green
+    Write-Status "Failed: $failureCount" -Status "error" -Color Red
+    Write-Status "Total: $totalRows" -Status "info" -Color Cyan
+    
+    Write-ProgressToMD "Aktarım tamamlandı. Başarılı: $successCount, Başarısız: $failureCount, Toplam: $totalRows" -Status "success"
+    
+    # Disconnect from SharePoint
+    Disconnect-PnPOnline
+    Write-Status "SharePoint connection closed" -Status "info" -Color Yellow
+    Write-ProgressToMD "SharePoint bağlantısı kapatıldı"
 }
 catch {
-    $errorMessage = "Hata: $($_.Exception.Message)"
-    Write-Host $errorMessage -ForegroundColor Red
-    Write-ProgressToMD $errorMessage
+    $errorMessage = "Error: $($_.Exception.Message)"
+    Write-Status $errorMessage -Status "error" -Color Red
+    Write-ProgressToMD $errorMessage -Status "error"
 }
 finally {
-    # Disconnect from SharePoint
-    try {
+    if (Get-PnPConnection) {
         Disconnect-PnPOnline
+        Write-Status "SharePoint connection closed" -Status "info" -Color Yellow
         Write-ProgressToMD "SharePoint bağlantısı kapatıldı"
-    } catch {
-        Write-ProgressToMD "SharePoint bağlantısı zaten kapalı"
     }
 }
