@@ -11,6 +11,9 @@
 # Progress file
 Progress.MD
 
+# Project file
+project.txt
+
 # Windows system files
 Thumbs.db
 desktop.ini
